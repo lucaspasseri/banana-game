@@ -1,0 +1,9 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+canvas {
+	/* height: calc(90vh); */
+	border: 1px solid black;
+}
