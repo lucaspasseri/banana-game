@@ -11,51 +11,8 @@
 <body>
 	<canvas
 		id="canvas"
-		onmousemove="mouseMoved(event)"
-		onclick="mouseClicked(event)"
 	></canvas>
 	
-	<script>
-		const canvas = document.querySelector("#canvas");
-		const context = canvas.getContext("2d");
-		canvas.height = 560;
-		canvas.width = 300;
-
-		function drawCircle(xPosition, yPosition, radius, color){
-			context.beginPath();
-			context.arc(xPosition, yPosition, radius, 0, 2 * Math.PI);
-			context.fillStyle = color;
-			context.fill();
-		}
-
-		function mouseMoved(event){
-			const xPositionMouse = event.clientX;
-			const yPositionMouse = event.clientY;
-			const xPositionCanvas = canvas.getBoundingClientRect().left;
-			const yPositionCanvas = canvas.getBoundingClientRect().top;
-
-			drawCircle( 
-				xPositionMouse - xPositionCanvas,
-				yPositionMouse - yPositionCanvas,
-				10,
-				"#0000FF"
-			);
-		}
-
-		function mouseClicked(event){
-			const xPositionMouse = event.clientX;
-			const yPositionMouse = event.clientY;
-			const xPositionCanvas = canvas.getBoundingClientRect().left;
-			const yPositionCanvas = canvas.getBoundingClientRect().top;
-
-			drawCircle( 
-				xPositionMouse - xPositionCanvas,
-				yPositionMouse - yPositionCanvas,
-				20,
-				"#FF0000"
-			);
-		}
-	</script>
-	<script src="./initialState.js"></script>
+	<script type="module" src="./index.js"></script>
 </body>
 </html>
