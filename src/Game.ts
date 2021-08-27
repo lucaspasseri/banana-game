@@ -1,58 +1,87 @@
+import Player from "./Player";
+import Rect from "./Rect";
+
 export default class Game {
 	canvas: HTMLCanvasElement;
 	context: CanvasRenderingContext2D;
-
+	intervalId: number;
+	player: Player;
+	floor: Rect;
+	
 	constructor(canvas: HTMLCanvasElement){
 		this.canvas = canvas;
 		this.context = this.canvas.getContext("2d");
 		this.canvas.height = 560;
 		this.canvas.width = 300;
-	}
-
-	drawCircle(
-		xPosition: number,
-		yPosition: number,
-		radius: number,
-		color: string): void{
-		this.context.beginPath();
-		this.context.arc(xPosition, yPosition, radius, 0, 2 * Math.PI);
-		this.context.fillStyle = color;
-		this.context.fill();
+		this.canvas.style.backgroundColor ="#181820";
 	}
 
 	start(): void{
-		this.drawCircle(0, 0, 20, "#00FF00");
-		this.drawCircle(300, 0, 20, "#00FF00");
-		this.drawCircle(0, 560, 20, "#00FF00");
-		this.drawCircle(300, 560, 20, "#00FF00");
-		this.drawCircle(150, 280, 20, "#00FF00");
+		this.player = new Player(this.canvas);
+		this.player.draw();
+		this.floor = new Rect(this.context, 6, 540, 288, 1, "#8b8b8f");
+		this.floor.draw();
+		this.startInterval();
 	}
 
-	mouseMoved(event: MouseEvent): void{
-		const xPositionMouse = event.clientX;
-		const yPositionMouse = event.clientY;
-		const xPositionCanvas = this.canvas.getBoundingClientRect().left;
-		const yPositionCanvas = this.canvas.getBoundingClientRect().top;
-	
-		this.drawCircle( 
-			xPositionMouse - xPositionCanvas,
-			yPositionMouse - yPositionCanvas,
-			10,
-			"#0000FF"
-		);
+	clearScreen(): void {
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	}
 
-	mouseClicked(event: MouseEvent): void{
-		const xPositionMouse = event.clientX;
-		const yPositionMouse = event.clientY;
-		const xPositionCanvas = this.canvas.getBoundingClientRect().left;
-		const yPositionCanvas = this.canvas.getBoundingClientRect().top;
+	mainLoop(): void{
+		this.clearScreen();
+		this.player.draw();
+		this.floor.draw();
+	}
 	
-		this.drawCircle( 
-			xPositionMouse - xPositionCanvas,
-			yPositionMouse - yPositionCanvas,
-			20,
-			"#FF0000"
-		);
+	startInterval(): void {
+		const {setInterval} = window;
+		this.intervalId = setInterval(() => this.mainLoop(), 1000/80);
+	}
+
+	keyDown(event: KeyboardEvent): void{
+		if(event.code === "KeyD" || event.code === "ArrowRight"){
+			this.player.moveTo(this.player.x + 5);
+		}
+		if(event.code === "KeyA" || event.code === "ArrowLeft"){
+			this.player.moveTo(this.player.x - 5);
+		}
+	}
+
+	mouseClicked(): void{
+		this.clearScreen();
+		this.start();
 	}
 }
+
+/* mouseMoved(event: MouseEvent): void{
+	const xPositionMouse = event.clientX;
+	const yPositionMouse = event.clientY;
+	const xPositionCanvas = this.canvas.getBoundingClientRect().left;
+	const yPositionCanvas = this.canvas.getBoundingClientRect().top;
+
+	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+	this.ball = new Ball(
+		this.context,
+		xPositionMouse - xPositionCanvas,
+		yPositionMouse - yPositionCanvas,
+		10,
+		"#0000FF");
+	this.ball.draw();
+} */
+
+/* mouseClicked(event: MouseEvent): void{
+	const xPositionMouse = event.clientX;
+	const yPositionMouse = event.clientY;
+	const xPositionCanvas = this.canvas.getBoundingClientRect().left;
+	const yPositionCanvas = this.canvas.getBoundingClientRect().top;
+
+	this.ball = new Ball(
+		this.context,
+		xPositionMouse - xPositionCanvas,
+		yPositionMouse - yPositionCanvas,
+		10,
+		"#00FF00");
+	this.ball.draw();
+} */

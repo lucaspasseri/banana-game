@@ -14,6 +14,9 @@ module.exports = {
 		extensions: [".ts", ".js"],
 	},
 	module: {
-		rules: [{ test: /\.ts$/, loader: "ts-loader" }],
+		rules: [
+			{ test: /\.ts$/, loader: "ts-loader" },
+			{ test: /\.(png|jpe?g|gif)$/i, loader: "file-loader" },	
+		],
 	},
 };
