@@ -1,6 +1,6 @@
-import Game from "./Game.js";
+import Game from "./Game";
 
-const canvas = document.querySelector("#canvas");
+const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 
 const game = new Game(canvas);
 game.start();
@@ -11,4 +11,4 @@ canvas.addEventListener("mousemove", (event) => {
 
 canvas.addEventListener("click", (event) => {
 	game.mouseClicked(event);
-});
+});	
