@@ -1,5 +1,4 @@
 import Sprite from "./Sprite";
-import playerSprite from "../assets/alien.png";
 
 export default class Player extends Sprite {
 	x: number;
@@ -9,13 +8,19 @@ export default class Player extends Sprite {
 	) {
 		super(
 			canvas.getContext("2d"),
-			canvas.width/2,
-			canvas.height-40,
-			playerSprite
+			canvas.width/2 - 20,
+			canvas.height-70,
+			"../assets/alien.png",
+			40,
+			50
 		);
 	}
-	
-	moveTo(x: number): void {
-		this.x = x;
+
+	moveRigth(): void {
+		if(this.x < 260) this.x += 5;
+	}
+
+	moveLeft(): void {
+		if(this.x > 0) this.x -= 5;
 	}
 }

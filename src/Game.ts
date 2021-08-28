@@ -36,15 +36,15 @@ export default class Game {
 	
 	startInterval(): void {
 		const {setInterval} = window;
-		this.intervalId = setInterval(() => this.mainLoop(), 1000/80);
+		this.intervalId = setInterval(() => this.mainLoop(), 1000/100);
 	}
 
 	keyDown(event: KeyboardEvent): void{
 		if(event.code === "KeyD" || event.code === "ArrowRight"){
-			this.player.moveTo(this.player.x + 5);
+			this.player.moveRigth();
 		}
 		if(event.code === "KeyA" || event.code === "ArrowLeft"){
-			this.player.moveTo(this.player.x - 5);
+			this.player.moveLeft();
 		}
 	}
 

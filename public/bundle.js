@@ -10,23 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./assets/alien.png":
-/*!**************************!*\
-  !*** ./assets/alien.png ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"094c60f8740b601e920627ef8b144b7c.png\");\n\n//# sourceURL=webpack://banana-game/./assets/alien.png?");
-
-/***/ }),
-
 /***/ "./src/Game.ts":
 /*!*********************!*\
   !*** ./src/Game.ts ***!
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Game)\n/* harmony export */ });\n/* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Player */ \"./src/Player.ts\");\n/* harmony import */ var _Rect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Rect */ \"./src/Rect.ts\");\n\n\nclass Game {\n    constructor(canvas) {\n        this.canvas = canvas;\n        this.context = this.canvas.getContext(\"2d\");\n        this.canvas.height = 560;\n        this.canvas.width = 300;\n        this.canvas.style.backgroundColor = \"#181820\";\n    }\n    start() {\n        this.player = new _Player__WEBPACK_IMPORTED_MODULE_0__.default(this.canvas);\n        this.player.draw();\n        this.floor = new _Rect__WEBPACK_IMPORTED_MODULE_1__.default(this.context, 6, 540, 288, 1, \"#8b8b8f\");\n        this.floor.draw();\n        this.startInterval();\n    }\n    clearScreen() {\n        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n    }\n    mainLoop() {\n        this.clearScreen();\n        this.player.draw();\n        this.floor.draw();\n    }\n    startInterval() {\n        const { setInterval } = window;\n        this.intervalId = setInterval(() => this.mainLoop(), 1000 / 80);\n    }\n    keyDown(event) {\n        if (event.code === \"KeyD\" || event.code === \"ArrowRight\") {\n            this.player.moveTo(this.player.x + 5);\n        }\n        if (event.code === \"KeyA\" || event.code === \"ArrowLeft\") {\n            this.player.moveTo(this.player.x - 5);\n        }\n    }\n    mouseClicked() {\n        this.clearScreen();\n        this.start();\n    }\n}\n/* mouseMoved(event: MouseEvent): void{\n    const xPositionMouse = event.clientX;\n    const yPositionMouse = event.clientY;\n    const xPositionCanvas = this.canvas.getBoundingClientRect().left;\n    const yPositionCanvas = this.canvas.getBoundingClientRect().top;\n\n    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n\n    this.ball = new Ball(\n        this.context,\n        xPositionMouse - xPositionCanvas,\n        yPositionMouse - yPositionCanvas,\n        10,\n        \"#0000FF\");\n    this.ball.draw();\n} */\n/* mouseClicked(event: MouseEvent): void{\n    const xPositionMouse = event.clientX;\n    const yPositionMouse = event.clientY;\n    const xPositionCanvas = this.canvas.getBoundingClientRect().left;\n    const yPositionCanvas = this.canvas.getBoundingClientRect().top;\n\n    this.ball = new Ball(\n        this.context,\n        xPositionMouse - xPositionCanvas,\n        yPositionMouse - yPositionCanvas,\n        10,\n        \"#00FF00\");\n    this.ball.draw();\n} */ \n\n\n//# sourceURL=webpack://banana-game/./src/Game.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Game)\n/* harmony export */ });\n/* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Player */ \"./src/Player.ts\");\n/* harmony import */ var _Rect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Rect */ \"./src/Rect.ts\");\n\n\nclass Game {\n    constructor(canvas) {\n        this.canvas = canvas;\n        this.context = this.canvas.getContext(\"2d\");\n        this.canvas.height = 560;\n        this.canvas.width = 300;\n        this.canvas.style.backgroundColor = \"#181820\";\n    }\n    start() {\n        this.player = new _Player__WEBPACK_IMPORTED_MODULE_0__.default(this.canvas);\n        this.player.draw();\n        this.floor = new _Rect__WEBPACK_IMPORTED_MODULE_1__.default(this.context, 6, 540, 288, 1, \"#8b8b8f\");\n        this.floor.draw();\n        this.startInterval();\n    }\n    clearScreen() {\n        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n    }\n    mainLoop() {\n        this.clearScreen();\n        this.player.draw();\n        this.floor.draw();\n    }\n    startInterval() {\n        const { setInterval } = window;\n        this.intervalId = setInterval(() => this.mainLoop(), 1000 / 100);\n    }\n    keyDown(event) {\n        if (event.code === \"KeyD\" || event.code === \"ArrowRight\") {\n            this.player.moveRigth();\n        }\n        if (event.code === \"KeyA\" || event.code === \"ArrowLeft\") {\n            this.player.moveLeft();\n        }\n    }\n    mouseClicked() {\n        this.clearScreen();\n        this.start();\n    }\n}\n/* mouseMoved(event: MouseEvent): void{\n    const xPositionMouse = event.clientX;\n    const yPositionMouse = event.clientY;\n    const xPositionCanvas = this.canvas.getBoundingClientRect().left;\n    const yPositionCanvas = this.canvas.getBoundingClientRect().top;\n\n    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n\n    this.ball = new Ball(\n        this.context,\n        xPositionMouse - xPositionCanvas,\n        yPositionMouse - yPositionCanvas,\n        10,\n        \"#0000FF\");\n    this.ball.draw();\n} */\n/* mouseClicked(event: MouseEvent): void{\n    const xPositionMouse = event.clientX;\n    const yPositionMouse = event.clientY;\n    const xPositionCanvas = this.canvas.getBoundingClientRect().left;\n    const yPositionCanvas = this.canvas.getBoundingClientRect().top;\n\n    this.ball = new Ball(\n        this.context,\n        xPositionMouse - xPositionCanvas,\n        yPositionMouse - yPositionCanvas,\n        10,\n        \"#00FF00\");\n    this.ball.draw();\n} */ \n\n\n//# sourceURL=webpack://banana-game/./src/Game.ts?");
 
 /***/ }),
 
@@ -36,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Player)\n/* harmony export */ });\n/* harmony import */ var _Sprite__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sprite */ \"./src/Sprite.ts\");\n/* harmony import */ var _assets_alien_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/alien.png */ \"./assets/alien.png\");\n\n\nclass Player extends _Sprite__WEBPACK_IMPORTED_MODULE_0__.default {\n    constructor(canvas) {\n        super(canvas.getContext(\"2d\"), canvas.width / 2, canvas.height - 40, _assets_alien_png__WEBPACK_IMPORTED_MODULE_1__.default);\n    }\n    moveTo(x) {\n        this.x = x;\n    }\n}\n\n\n//# sourceURL=webpack://banana-game/./src/Player.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Player)\n/* harmony export */ });\n/* harmony import */ var _Sprite__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sprite */ \"./src/Sprite.ts\");\n\nclass Player extends _Sprite__WEBPACK_IMPORTED_MODULE_0__.default {\n    constructor(canvas) {\n        super(canvas.getContext(\"2d\"), canvas.width / 2 - 20, canvas.height - 70, \"../assets/alien.png\", 40, 50);\n    }\n    moveRigth() {\n        if (this.x < 260)\n            this.x += 5;\n    }\n    moveLeft() {\n        if (this.x > 0)\n            this.x -= 5;\n    }\n}\n\n\n//# sourceURL=webpack://banana-game/./src/Player.ts?");
 
 /***/ }),
 
@@ -56,7 +46,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Sprite)\n/* harmony export */ });\nclass Sprite {\n    constructor(context, x, y, image) {\n        this.context = context;\n        this.x = x;\n        this.y = y;\n        this.image = image;\n    }\n    draw() {\n        this.context.drawImage(this.image, this.x, this.y);\n    }\n}\n\n\n//# sourceURL=webpack://banana-game/./src/Sprite.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Sprite)\n/* harmony export */ });\nclass Sprite {\n    constructor(context, x, y, src, width, height) {\n        this.context = context;\n        this.x = x;\n        this.y = y;\n        this.src = src;\n        this.width = width;\n        this.height = height;\n    }\n    draw() {\n        this.image = new Image();\n        this.image.onload = () => {\n            this.context.drawImage(this.image, this.x, this.y, this.width, this.height);\n        };\n        this.image.src = this.src;\n    }\n}\n\n\n//# sourceURL=webpack://banana-game/./src/Sprite.ts?");
 
 /***/ }),
 
@@ -109,18 +99,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Gam
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -135,26 +113,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Gam
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
