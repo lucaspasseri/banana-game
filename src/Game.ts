@@ -1,5 +1,6 @@
 import Player from "./Player";
 import Rect from "./Rect";
+import Fruit from "./Fruit";
 
 export default class Game {
 	canvas: HTMLCanvasElement;
@@ -7,6 +8,7 @@ export default class Game {
 	intervalId: number;
 	player: Player;
 	floor: Rect;
+	fruits: Fruit[];
 	
 	constructor(canvas: HTMLCanvasElement){
 		this.canvas = canvas;
@@ -21,6 +23,10 @@ export default class Game {
 		this.player.draw();
 		this.floor = new Rect(this.context, 6, 540, 288, 1, "#8b8b8f");
 		this.floor.draw();
+		this.fruits = [];
+		const orange = new Fruit(this.canvas, "../assets/orange.png");
+		this.fruits.push(orange);
+		this.fruits.forEach(fruit => fruit.draw());
 		this.startInterval();
 	}
 
@@ -32,11 +38,13 @@ export default class Game {
 		this.clearScreen();
 		this.player.draw();
 		this.floor.draw();
+		this.fruits.forEach(fruit => fruit.move());
+		this.fruits.forEach(fruit => fruit.draw());
 	}
 	
 	startInterval(): void {
 		const {setInterval} = window;
-		this.intervalId = setInterval(() => this.mainLoop(), 1000/100);
+		this.intervalId = setInterval(() => this.mainLoop(), 1000/60);
 	}
 
 	keyDown(event: KeyboardEvent): void{

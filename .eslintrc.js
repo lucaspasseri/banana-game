@@ -17,7 +17,7 @@ module.exports = {
 		"@typescript-eslint"
 	],
 	"rules": {
-		"indent": [
+		"@typescript-eslint/indent": [
 			"error",
 			"tab"
 		],
