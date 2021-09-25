@@ -1,6 +1,7 @@
 import Player from "./Player";
 import Rect from "./Rect";
 import Fruit from "./Fruit";
+import checkColision from "./utils/checkColision";
 
 export default class Game {
 	canvas: HTMLCanvasElement;
@@ -39,7 +40,20 @@ export default class Game {
 		context.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
-	mainLoop(): void {
+	getFruits(): void {
+		this.fruits.forEach(fruit => {
+			const colision = checkColision(this.player, fruit);
+			if (colision) {
+				this.fruits = this.fruits.filter(f => f !== fruit);
+			}
+		});
+	}
+
+	updateStates(): void {
+		this.getFruits();
+	}
+
+	renderGame(): void {
 		this.clearScreen(this.tempContext, this.tempCanvas);
 		this.player.draw();
 		this.floor.draw();
@@ -47,6 +61,11 @@ export default class Game {
 		this.fruits.forEach(fruit => fruit.draw());
 		this.clearScreen(this.context, this.canvas);
 		this.context.drawImage(this.tempCanvas, 0, 0);
+	}
+
+	mainLoop(): void {
+		this.updateStates();
+		this.renderGame();
 	}
 
 	startInterval(): void {

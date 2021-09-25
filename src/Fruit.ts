@@ -1,9 +1,8 @@
-import randomValue from "./Utils/randomHelper";
+import randomValue from "./utils/randomHelper";
 import Sprite from "./Sprite";
 
 export default class Fruit extends Sprite {
-	y: number;
-	outOfScreen: boolean;
+	fruitIsOutOfLimits: boolean;
 
 	constructor(canvas: HTMLCanvasElement) {
 		const fruitsData = [
@@ -28,7 +27,7 @@ export default class Fruit extends Sprite {
 		}
 
 		if (this.y > 540) {
-			this.outOfScreen = true; ////// TENTAR DESTRUIR A INSTANCIA QUANDO outOfScreen for true???!!
+			this.fruitIsOutOfLimits = true;
 		}
 	}
 }
