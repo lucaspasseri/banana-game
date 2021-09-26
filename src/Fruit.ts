@@ -12,7 +12,7 @@ export default class Fruit extends Sprite {
 				name: "banana",
 				src: "./assets/banana.png",
 				width: 25,
-				height: 30,
+				height: 35,
 				points: 0,
 			},
 			{

@@ -1,6 +1,7 @@
 import Player from "./Player";
 import Rect from "./Rect";
 import Fruit from "./Fruit";
+import Life from "./Life";
 import Text from "./Text";
 import checkColision from "./utils/checkColision";
 
@@ -13,6 +14,8 @@ export default class Game {
 	newFruitsInterval: number;
 	player: Player;
 	topBar: Rect;
+	lives: Life[];
+	quantityOfLife: number;
 	scoreText: Text;
 	scoreValue: Text;
 	score: number;
@@ -34,6 +37,13 @@ export default class Game {
 	start(): void {
 		this.player = new Player(this.tempCanvas);
 		this.topBar = new Rect(this.tempContext, 0, 0, 300, 60, "#000");
+		this.quantityOfLife = 3;
+		this.lives = [];
+
+		for (let i = 0; i < this.quantityOfLife; i++) {
+			this.lives.push(new Life(this.tempCanvas));
+		}
+
 		this.score = 0;
 		this.scoreText = new Text(this.tempContext, 200, 25, this.score);
 		this.scoreValue = new Text(this.tempContext, 210, 50, this.score);
@@ -62,14 +72,29 @@ export default class Game {
 		});
 	}
 
+	dropFruits(): void {
+		this.fruits.forEach(fruit => {
+			const colision = checkColision(this.player, fruit);
+			if (colision) {
+				this.fruits = this.fruits.filter(f => f !== fruit);
+				this.score += fruit.points;
+				if (fruit.banana) {
+					this.score *= 2;
+				}
+			}
+		});
+	}
+
 	updateStates(): void {
 		this.getFruits();
+		this.dropFruits();
 	}
 
 	renderGame(): void {
 		this.clearScreen(this.tempContext, this.tempCanvas);
 		this.player.draw();
 		this.topBar.draw();
+		this.lives.forEach(life => life.draw());
 		this.scoreText.draw("text", this.score);
 		this.scoreValue.draw("value", this.score);
 		this.floor.draw();
