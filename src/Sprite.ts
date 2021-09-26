@@ -1,4 +1,3 @@
-import { promisify } from "util";
 export default class Sprite {
 	context: CanvasRenderingContext2D;
 	x: number;

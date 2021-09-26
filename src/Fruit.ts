@@ -10,7 +10,7 @@ export default class Fruit extends Sprite {
 		const fruitsData = [
 			{
 				name: "banana",
-				src: "../assets/banana.png",
+				src: "./assets/banana.png",
 				width: 25,
 				height: 30,
 				points: 0,
