@@ -5,6 +5,7 @@ export default class Fruit extends Sprite {
 	wasDropped: boolean;
 	points: number;
 	isBanana: boolean;
+	velocity: number;
 
 	constructor(canvas: HTMLCanvasElement) {
 		const fruitsData = [
@@ -53,11 +54,12 @@ export default class Fruit extends Sprite {
 			this.isBanana = true;
 		}
 		this.points = points;
+		this.velocity = 1;
 	}
 
 	move(): void {
 		if (this.y < 545) {
-			this.y += 1;
+			this.y += this.velocity;
 		}
 
 		if (this.y > 540) {

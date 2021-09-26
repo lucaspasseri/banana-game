@@ -41,6 +41,7 @@ export default class Game {
 		this.topBar = new Rect(this.tempContext, 0, 0, 300, 60, "#000");
 		this.quantityOfLife = 3;
 		this.lives = [];
+		this.fruits = [];
 
 		for (let i = 0; i < this.quantityOfLife; i++) {
 			this.lives.push(new Life(this.tempCanvas));
@@ -50,7 +51,6 @@ export default class Game {
 		this.scoreText = new Text(this.tempContext, 200, 25, this.score);
 		this.scoreValue = new Text(this.tempContext, 210, 50, this.score);
 		this.floor = new Rect(this.tempContext, 6, 540, 288, 1, "#8b8b8f");
-		this.fruits = [];
 		this.startInterval();
 	}
 
@@ -75,14 +75,16 @@ export default class Game {
 	}
 
 	endGame(): void {
+		const response = confirm("Fim de jogo! Gostaria de jogar novamente?");
 		clearInterval(this.gameInterval);
 		clearInterval(this.newFruitsInterval);
-		const response = confirm("Fim de jogo!");
-		console.log(response);
 		if (response) {
+			this.fruits = [];
 			Game.droppedFruits = 0;
 			Life.id = 0;
-			this.fruits = [];
+			clearInterval(this.gameInterval);
+			clearInterval(this.newFruitsInterval);
+
 			this.start();
 		}
 	}
@@ -147,6 +149,8 @@ export default class Game {
 	}
 
 	mouseClicked(): void {
+		clearInterval(this.gameInterval);
+		clearInterval(this.newFruitsInterval);
 		Game.droppedFruits = 0;
 		Life.id = 0;
 		this.fruits = [];
