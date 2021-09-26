@@ -54,7 +54,7 @@ export default class Fruit extends Sprite {
 			this.isBanana = true;
 		}
 		this.points = points;
-		this.velocity = 1;
+		this.velocity = 3;
 	}
 
 	move(): void {

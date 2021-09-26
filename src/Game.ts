@@ -1,9 +1,11 @@
 import Player from "./Player";
 import Rect from "./Rect";
 import Fruit from "./Fruit";
+import Bomb from "./Bomb";
 import Life from "./Life";
 import Text from "./Text";
 import checkColision from "./utils/checkColision";
+import randomValue from "./utils/randomHelper";
 
 export default class Game {
 	canvas: HTMLCanvasElement;
@@ -12,6 +14,7 @@ export default class Game {
 	tempContext: CanvasRenderingContext2D;
 	gameInterval: number;
 	newFruitsInterval: number;
+	newBombsInterval: number;
 	player: Player;
 	topBar: Rect;
 	lives: Life[];
@@ -21,6 +24,7 @@ export default class Game {
 	score: number;
 	floor: Rect;
 	fruits: Fruit[];
+	bombs: Bomb[];
 
 	static droppedFruits = 0;
 
@@ -42,6 +46,7 @@ export default class Game {
 		this.quantityOfLife = 3;
 		this.lives = [];
 		this.fruits = [];
+		this.bombs = [];
 
 		for (let i = 0; i < this.quantityOfLife; i++) {
 			this.lives.push(new Life(this.tempCanvas));
@@ -61,6 +66,24 @@ export default class Game {
 		context.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
+	endGame(): void {
+		clearInterval(this.gameInterval);
+		clearInterval(this.newFruitsInterval);
+		clearInterval(this.newBombsInterval);
+		const response = confirm("Fim de jogo! Gostaria de jogar novamente?");
+		if (response) {
+			this.fruits = [];
+			this.bombs = [];
+			Game.droppedFruits = 0;
+			Life.id = 0;
+			clearInterval(this.gameInterval);
+			clearInterval(this.newFruitsInterval);
+			clearInterval(this.newBombsInterval);
+
+			this.start();
+		}
+	}
+
 	getFruits(): void {
 		this.fruits.forEach(fruit => {
 			const colision = checkColision(this.player, fruit);
@@ -72,21 +95,6 @@ export default class Game {
 				}
 			}
 		});
-	}
-
-	endGame(): void {
-		const response = confirm("Fim de jogo! Gostaria de jogar novamente?");
-		clearInterval(this.gameInterval);
-		clearInterval(this.newFruitsInterval);
-		if (response) {
-			this.fruits = [];
-			Game.droppedFruits = 0;
-			Life.id = 0;
-			clearInterval(this.gameInterval);
-			clearInterval(this.newFruitsInterval);
-
-			this.start();
-		}
 	}
 
 	dropFruits(): void {
@@ -106,9 +114,25 @@ export default class Game {
 		});
 	}
 
+	getBombs(): void {
+		this.bombs.forEach(bomb => {
+			const colision = checkColision(this.player, bomb);
+			if (colision) {
+				this.bombs = this.bombs.filter(b => b !== bomb);
+				this.endGame();
+			}
+		});
+	}
+
+	dropBombs(): void {
+		this.bombs = this.bombs.filter(bomb => bomb.isOutOfLimits !== true);
+	}
+
 	updateStates(): void {
 		this.getFruits();
 		this.dropFruits();
+		this.getBombs();
+		this.dropBombs();
 	}
 
 	renderGame(): void {
@@ -121,6 +145,8 @@ export default class Game {
 		this.floor.draw();
 		this.fruits.forEach(fruit => fruit.move());
 		this.fruits.forEach(fruit => fruit.draw());
+		this.bombs.forEach(bomb => bomb.move());
+		this.bombs.forEach(bomb => bomb.draw());
 		this.clearScreen(this.context, this.canvas);
 		this.context.drawImage(this.tempCanvas, 0, 0);
 	}
@@ -137,6 +163,10 @@ export default class Game {
 			() => this.fruits.push(new Fruit(this.tempCanvas)),
 			2000
 		);
+		this.newBombsInterval = setInterval(
+			() => this.bombs.push(new Bomb(this.tempCanvas)),
+			randomValue(4000, 10000)
+		);
 	}
 
 	keyDown(event: KeyboardEvent): void {
@@ -151,9 +181,11 @@ export default class Game {
 	mouseClicked(): void {
 		clearInterval(this.gameInterval);
 		clearInterval(this.newFruitsInterval);
+		clearInterval(this.newBombsInterval);
 		Game.droppedFruits = 0;
 		Life.id = 0;
 		this.fruits = [];
+		this.bombs = [];
 		this.start();
 	}
 }
