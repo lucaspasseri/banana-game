@@ -20,6 +20,19 @@ export default class Sprite {
 		this.width = width;
 		this.height = height;
 		this.image = new Image();
+		this.image.addEventListener(
+			"load",
+			() => {
+				this.context.drawImage(
+					this.image,
+					this.x,
+					this.y,
+					this.width,
+					this.height
+				);
+			},
+			false
+		);
 		this.image.src = src;
 	}
 
