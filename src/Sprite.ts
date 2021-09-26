@@ -1,3 +1,4 @@
+import { promisify } from "util";
 export default class Sprite {
 	context: CanvasRenderingContext2D;
 	x: number;
@@ -5,6 +6,7 @@ export default class Sprite {
 	width: number;
 	height: number;
 	image: HTMLImageElement;
+	src: string;
 
 	constructor(
 		context: CanvasRenderingContext2D,
@@ -19,11 +21,20 @@ export default class Sprite {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.src = src;
 		this.image = new Image();
-		this.image.src = src;
+		this.image.src = this.src;
 	}
 
 	draw(): void {
-		this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
+		if (this.image.complete) {
+			this.context.drawImage(
+				this.image,
+				this.x,
+				this.y,
+				this.width,
+				this.height
+			);
+		}
 	}
 }
