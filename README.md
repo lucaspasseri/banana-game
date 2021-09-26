@@ -32,18 +32,18 @@ $ firefox index.html
 Languages:<br>
 
 <p align="center">
-		![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-		![HTML](https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white)
-    ![CSS](https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white)
-    ![Javascript](https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+	<img scr='https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white'>
+	<img scr='https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white'>
+	<img scr='https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white'>
+	<img scr='https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E'>
 </p>
 <br>
 
 Version Control:<br>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/git%20-%23F05033.svg?&style=for-the-badge&logo=git&logoColor=white"/>
-    <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
+	<img src="https://img.shields.io/badge/git%20-%23F05033.svg?&style=for-the-badge&logo=git&logoColor=white"/>
+	<img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
 </p>
 
 ### Deploy
@@ -65,15 +65,15 @@ The application is available on Vercel:
 <p align='center'>
   Made by Lucas Passeri 👋🏽 Get in Touch! <br><br>
 	<table align="center">
-  		<tr>
-    		<td align="center">
-				<p align='center'>
-	  				<img src="https://avatars.githubusercontent.com/u/16906161?v=4" width="100px;"/> <br />
- 					<sub><b>Lucas Passeri</b></sub><br />
-	  				<a href="https://www.linkedin.com/in/lucas-passeri-7b05377b/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>
-	  				<a href="mailto:lucaspasseri@poli.ufrj.br"><img src="https://img.shields.io/badge/gmail-D14836?&style=for-the-badge&logo=gmail&logoColor=white"/></a>
-  				</p><br />
-			</td>
-  		</tr>
+		<tr>
+			<td align="center">
+			<p align='center'>
+				<img src="https://avatars.githubusercontent.com/u/16906161?v=4" width="100px;"/> <br />
+				<sub><b>Lucas Passeri</b></sub><br />
+				<a href="https://www.linkedin.com/in/lucas-passeri-7b05377b/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+				<a href="mailto:lucaspasseri@poli.ufrj.br"><img src="https://img.shields.io/badge/gmail-D14836?&style=for-the-badge&logo=gmail&logoColor=white"/></a>
+			</p><br />
+		</td>
+		</tr>
 	</table>
 </p>
