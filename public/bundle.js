@@ -56,7 +56,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Sprite)\n/* harmony export */ });\nclass Sprite {\n    constructor(context, x, y, width, height, src) {\n        this.context = context;\n        this.x = x;\n        this.y = y;\n        this.width = width;\n        this.height = height;\n        this.src = src;\n        this.image = new Image();\n        this.image.src = this.src;\n    }\n    draw() {\n        if (this.image.complete) {\n            this.context.drawImage(this.image, this.x, this.y, this.width, this.height);\n        }\n    }\n}\n\n\n//# sourceURL=webpack://banana-game/./src/Sprite.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Sprite)\n/* harmony export */ });\nclass Sprite {\n    constructor(context, x, y, width, height, src) {\n        this.context = context;\n        this.x = x;\n        this.y = y;\n        this.width = width;\n        this.height = height;\n        this.src = src;\n        this.image = new Image();\n        this.image.src = this.src;\n    }\n    draw() {\n        this.context.drawImage(this.image, this.x, this.y, this.width, this.height);\n    }\n}\n\n\n//# sourceURL=webpack://banana-game/./src/Sprite.ts?");
 
 /***/ }),
 

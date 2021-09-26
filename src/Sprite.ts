@@ -26,14 +26,6 @@ export default class Sprite {
 	}
 
 	draw(): void {
-		if (this.image.complete) {
-			this.context.drawImage(
-				this.image,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			);
-		}
+		this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
 	}
 }
