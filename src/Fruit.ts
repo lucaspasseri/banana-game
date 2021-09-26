@@ -2,9 +2,9 @@ import randomValue from "./utils/randomHelper";
 import Sprite from "./Sprite";
 
 export default class Fruit extends Sprite {
-	fruitIsOutOfLimits: boolean;
+	wasDropped: boolean;
 	points: number;
-	banana: boolean;
+	isBanana: boolean;
 
 	constructor(canvas: HTMLCanvasElement) {
 		const fruitsData = [
@@ -50,7 +50,7 @@ export default class Fruit extends Sprite {
 		//prettier-ignore
 		super(canvas.getContext("2d"), randomPosition, -height, width, height, src);
 		if (name === "banana") {
-			this.banana = true;
+			this.isBanana = true;
 		}
 		this.points = points;
 	}
@@ -61,7 +61,7 @@ export default class Fruit extends Sprite {
 		}
 
 		if (this.y > 540) {
-			this.fruitIsOutOfLimits = true;
+			this.wasDropped = true;
 		}
 	}
 }

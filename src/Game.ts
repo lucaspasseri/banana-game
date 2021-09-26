@@ -22,6 +22,8 @@ export default class Game {
 	floor: Rect;
 	fruits: Fruit[];
 
+	static droppedFruits = 0;
+
 	constructor(canvas: HTMLCanvasElement, tempCanvas: HTMLCanvasElement) {
 		this.canvas = canvas;
 		this.context = this.canvas.getContext("2d");
@@ -65,22 +67,39 @@ export default class Game {
 			if (colision) {
 				this.fruits = this.fruits.filter(f => f !== fruit);
 				this.score += fruit.points;
-				if (fruit.banana) {
+				if (fruit.isBanana) {
 					this.score *= 2;
 				}
 			}
 		});
 	}
 
+	endGame(): void {
+		clearInterval(this.gameInterval);
+		clearInterval(this.newFruitsInterval);
+		const response = confirm("Fim de jogo!");
+		console.log(response);
+		if (response) {
+			Game.droppedFruits = 0;
+			Life.id = 0;
+			this.fruits = [];
+			this.start();
+		}
+	}
+
 	dropFruits(): void {
-		this.fruits.forEach(fruit => {
-			const colision = checkColision(this.player, fruit);
-			if (colision) {
-				this.fruits = this.fruits.filter(f => f !== fruit);
-				this.score += fruit.points;
-				if (fruit.banana) {
-					this.score *= 2;
+		this.fruits = this.fruits.flatMap(fruit => {
+			if (fruit.wasDropped) {
+				if (Game.droppedFruits < this.lives.length) {
+					const currentLife = this.lives.length - 1 - Game.droppedFruits;
+					this.lives[currentLife].updateImage("./assets/heart-empty.png");
+					Game.droppedFruits += 1;
+				} else {
+					this.endGame();
 				}
+				return [];
+			} else {
+				return [fruit];
 			}
 		});
 	}
@@ -128,7 +147,9 @@ export default class Game {
 	}
 
 	mouseClicked(): void {
-		this.clearScreen(this.context, this.canvas);
+		Game.droppedFruits = 0;
+		Life.id = 0;
+		this.fruits = [];
 		this.start();
 	}
 }

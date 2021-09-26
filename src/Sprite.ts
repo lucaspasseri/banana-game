@@ -28,4 +28,8 @@ export default class Sprite {
 	draw(): void {
 		this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
 	}
+	updateImage(src: string): void {
+		this.src = src;
+		this.image.src = src;
+	}
 }
