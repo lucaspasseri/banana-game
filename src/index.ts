@@ -14,11 +14,3 @@ canvas.addEventListener("click", () => {
 window.addEventListener("keydown", event => {
 	game.keyDown(event);
 });
-
-/* canvas.addEventListener("keydown", (event) => {
-	game.keyDown(event);
-}); */
-
-/* canvas.addEventListener("mousemove", (event) => {
-	game.mouseMoved(event);
-});	 */

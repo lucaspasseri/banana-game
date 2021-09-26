@@ -1,6 +1,7 @@
 import Player from "./Player";
 import Rect from "./Rect";
 import Fruit from "./Fruit";
+import Life from "./Life";
 import Text from "./Text";
 import checkColision from "./utils/checkColision";
 
@@ -13,11 +14,15 @@ export default class Game {
 	newFruitsInterval: number;
 	player: Player;
 	topBar: Rect;
+	lives: Life[];
+	quantityOfLife: number;
 	scoreText: Text;
 	scoreValue: Text;
 	score: number;
 	floor: Rect;
 	fruits: Fruit[];
+
+	static droppedFruits = 0;
 
 	constructor(canvas: HTMLCanvasElement, tempCanvas: HTMLCanvasElement) {
 		this.canvas = canvas;
@@ -34,11 +39,18 @@ export default class Game {
 	start(): void {
 		this.player = new Player(this.tempCanvas);
 		this.topBar = new Rect(this.tempContext, 0, 0, 300, 60, "#000");
+		this.quantityOfLife = 3;
+		this.lives = [];
+		this.fruits = [];
+
+		for (let i = 0; i < this.quantityOfLife; i++) {
+			this.lives.push(new Life(this.tempCanvas));
+		}
+
 		this.score = 0;
 		this.scoreText = new Text(this.tempContext, 200, 25, this.score);
 		this.scoreValue = new Text(this.tempContext, 210, 50, this.score);
 		this.floor = new Rect(this.tempContext, 6, 540, 288, 1, "#8b8b8f");
-		this.fruits = [];
 		this.startInterval();
 	}
 
@@ -55,21 +67,55 @@ export default class Game {
 			if (colision) {
 				this.fruits = this.fruits.filter(f => f !== fruit);
 				this.score += fruit.points;
-				if (fruit.banana) {
+				if (fruit.isBanana) {
 					this.score *= 2;
 				}
 			}
 		});
 	}
 
+	endGame(): void {
+		const response = confirm("Fim de jogo! Gostaria de jogar novamente?");
+		clearInterval(this.gameInterval);
+		clearInterval(this.newFruitsInterval);
+		if (response) {
+			this.fruits = [];
+			Game.droppedFruits = 0;
+			Life.id = 0;
+			clearInterval(this.gameInterval);
+			clearInterval(this.newFruitsInterval);
+
+			this.start();
+		}
+	}
+
+	dropFruits(): void {
+		this.fruits = this.fruits.flatMap(fruit => {
+			if (fruit.wasDropped) {
+				if (Game.droppedFruits < this.lives.length) {
+					const currentLife = this.lives.length - 1 - Game.droppedFruits;
+					this.lives[currentLife].updateImage("./assets/heart-empty.png");
+					Game.droppedFruits += 1;
+				} else {
+					this.endGame();
+				}
+				return [];
+			} else {
+				return [fruit];
+			}
+		});
+	}
+
 	updateStates(): void {
 		this.getFruits();
+		this.dropFruits();
 	}
 
 	renderGame(): void {
 		this.clearScreen(this.tempContext, this.tempCanvas);
 		this.player.draw();
 		this.topBar.draw();
+		this.lives.forEach(life => life.draw());
 		this.scoreText.draw("text", this.score);
 		this.scoreValue.draw("value", this.score);
 		this.floor.draw();
@@ -103,7 +149,11 @@ export default class Game {
 	}
 
 	mouseClicked(): void {
-		this.clearScreen(this.context, this.canvas);
+		clearInterval(this.gameInterval);
+		clearInterval(this.newFruitsInterval);
+		Game.droppedFruits = 0;
+		Life.id = 0;
+		this.fruits = [];
 		this.start();
 	}
 }
