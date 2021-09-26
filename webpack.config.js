@@ -7,7 +7,7 @@ module.exports = {
 	entry: "./src/index.ts",
 	output: {
 		// eslint-disable-next-line no-undef
-		path: path.join(__dirname, ""),
+		path: path.join(__dirname, "public"),
 		filename: "bundle.js",
 	},
 	resolve: {
