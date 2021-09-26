@@ -18,7 +18,8 @@ export default function checkColision(player: Player, fruit: Fruit): boolean {
 
 	const horizontalIntersection =
 		(fruitX0 >= playerX0 && fruitX0 <= playerX1) ||
-		(fruitX1 >= playerX0 && fruitX1 <= playerX1);
+		(fruitX1 >= playerX0 && fruitX1 <= playerX1) ||
+		(fruitX0 <= playerX0 && fruitX1 >= playerX1);
 
 	const colision = verticalIntersection && horizontalIntersection;
 

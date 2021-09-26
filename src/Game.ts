@@ -1,6 +1,7 @@
 import Player from "./Player";
 import Rect from "./Rect";
 import Fruit from "./Fruit";
+import Text from "./Text";
 import checkColision from "./utils/checkColision";
 
 export default class Game {
@@ -11,6 +12,10 @@ export default class Game {
 	gameInterval: number;
 	newFruitsInterval: number;
 	player: Player;
+	topBar: Rect;
+	scoreText: Text;
+	scoreValue: Text;
+	score: number;
 	floor: Rect;
 	fruits: Fruit[];
 
@@ -28,6 +33,10 @@ export default class Game {
 
 	start(): void {
 		this.player = new Player(this.tempCanvas);
+		this.topBar = new Rect(this.tempContext, 0, 0, 300, 60, "#000");
+		this.score = 0;
+		this.scoreText = new Text(this.tempContext, 200, 25, this.score);
+		this.scoreValue = new Text(this.tempContext, 210, 50, this.score);
 		this.floor = new Rect(this.tempContext, 6, 540, 288, 1, "#8b8b8f");
 		this.fruits = [];
 		this.startInterval();
@@ -45,6 +54,10 @@ export default class Game {
 			const colision = checkColision(this.player, fruit);
 			if (colision) {
 				this.fruits = this.fruits.filter(f => f !== fruit);
+				this.score += fruit.points;
+				if (fruit.banana) {
+					this.score *= 2;
+				}
 			}
 		});
 	}
@@ -56,6 +69,9 @@ export default class Game {
 	renderGame(): void {
 		this.clearScreen(this.tempContext, this.tempCanvas);
 		this.player.draw();
+		this.topBar.draw();
+		this.scoreText.draw("text", this.score);
+		this.scoreValue.draw("value", this.score);
 		this.floor.draw();
 		this.fruits.forEach(fruit => fruit.move());
 		this.fruits.forEach(fruit => fruit.draw());
@@ -91,35 +107,3 @@ export default class Game {
 		this.start();
 	}
 }
-
-/* mouseMoved(event: MouseEvent): void{
-	const xPositionMouse = event.clientX;
-	const yPositionMouse = event.clientY;
-	const xPositionCanvas = this.canvas.getBoundingClientRect().left;
-	const yPositionCanvas = this.canvas.getBoundingClientRect().top;
-
-	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-	this.ball = new Ball(
-		this.context,
-		xPositionMouse - xPositionCanvas,
-		yPositionMouse - yPositionCanvas,
-		10,
-		"#0000FF");
-	this.ball.draw();
-} */
-
-/* mouseClicked(event: MouseEvent): void{
-	const xPositionMouse = event.clientX;
-	const yPositionMouse = event.clientY;
-	const xPositionCanvas = this.canvas.getBoundingClientRect().left;
-	const yPositionCanvas = this.canvas.getBoundingClientRect().top;
-
-	this.ball = new Ball(
-		this.context,
-		xPositionMouse - xPositionCanvas,
-		yPositionMouse - yPositionCanvas,
-		10,
-		"#00FF00");
-	this.ball.draw();
-} */

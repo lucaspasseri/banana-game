@@ -5,7 +5,7 @@ export default class Player extends Sprite {
 
 	constructor(canvas: HTMLCanvasElement) {
 		const playerWidth = 40;
-		const playerHeight = 70;
+		const playerHeight = 60;
 		const floorHeight = 20;
 		const imageSrc = "../assets/alien.png";
 		super(
