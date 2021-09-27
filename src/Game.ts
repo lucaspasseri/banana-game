@@ -210,7 +210,7 @@ export default class Game {
 			() => this.fruits.push(new Fruit(this.tempCanvas)),
 			21115
 		);
-		this.newFruitsInterval3 = setInterval(
+		this.newFruitsInterval4 = setInterval(
 			() => this.fruits.push(new Fruit(this.tempCanvas)),
 			43219
 		);
@@ -247,7 +247,7 @@ export default class Game {
 		clearInterval(this.newFruitsInterval);
 		clearInterval(this.newFruitsInterval2);
 		clearInterval(this.newFruitsInterval3);
-		clearInterval(this.newFruitsInterval3);
+		clearInterval(this.newFruitsInterval4);
 		clearInterval(this.newBombsInterval);
 		clearInterval(this.newHeartsInterval);
 		Game.droppedFruits = 0;
