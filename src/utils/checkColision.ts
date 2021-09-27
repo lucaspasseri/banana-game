@@ -1,10 +1,11 @@
 import Fruit from "../Fruit";
 import Player from "../Player";
 import Bomb from "../Bomb";
+import Heart from "../Heart";
 
 export default function checkColision(
 	player: Player,
-	fallingObject: Fruit | Bomb
+	fallingObject: Fruit | Bomb | Heart
 ): boolean {
 	const playerY0 = player.y;
 	const playerY1 = player.y + player.height;

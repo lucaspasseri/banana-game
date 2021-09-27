@@ -14,3 +14,7 @@ canvas.addEventListener("click", () => {
 window.addEventListener("keydown", event => {
 	game.keyDown(event);
 });
+
+window.addEventListener("keyup", event => {
+	game.keyUp(event);
+});

@@ -1,7 +1,7 @@
 import Sprite from "./Sprite";
 
 export default class Player extends Sprite {
-	x: number;
+	velocity: number;
 
 	constructor(canvas: HTMLCanvasElement) {
 		const playerWidth = 40;
@@ -16,15 +16,22 @@ export default class Player extends Sprite {
 			playerHeight,
 			imageSrc
 		);
+		this.velocity = 6;
 	}
 
 	move(direction: string): void {
 		if (direction === "left") {
-			if (this.x > 0) this.x -= 5;
+			this.velocity = 6;
+			if (this.x > 0) this.x -= this.velocity;
 		}
 
 		if (direction === "right") {
-			if (this.x < 260) this.x += 5;
+			this.velocity = 6;
+			if (this.x < 260) this.x += this.velocity;
+		}
+
+		if (direction === "stop") {
+			this.velocity = 0;
 		}
 	}
 }
