@@ -2,7 +2,7 @@ import randomValue from "./utils/randomHelper";
 import Sprite from "./Sprite";
 
 export default class Bomb extends Sprite {
-	isOutOfLimits: boolean;
+	wasDropped: boolean;
 	velocity: number;
 
 	constructor(canvas: HTMLCanvasElement) {
@@ -28,7 +28,7 @@ export default class Bomb extends Sprite {
 		}
 
 		if (this.y > 540) {
-			this.isOutOfLimits = true;
+			this.wasDropped = true;
 		}
 	}
 }
